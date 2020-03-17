@@ -1,0 +1,67 @@
+
+header{
+  background-color: aqua;
+  text-align: center;
+  padding: 5px;
+  
+}
+
+.header_title{
+  margin: 15px 0 0 27px;
+  padding: 0;
+  display: inline-block;
+  font-family: sans-serif;
+}
+
+.brand-logo{
+  width: 150px;
+height: 150px;
+  margin: 5px 5px 0 0;
+color: #222;
+}
+
+.main {
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 40px;
+      
+}
+
+.title{
+  text-align: center;
+  color: burlywood;
+}
+.sizeTodo {
+  max-width: 800px;
+}
+.task_title {
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: crimson;
+  font-size: 22px;
+}
+
+.task {
+  height: 100%;
+  background-color: rgb(200, 222, 250);
+}
+
+.task-done {
+  text-decoration-line: line-through
+}
+
+.btn {
+  width: 100px;
+  margin: 4px;
+}
+
+footer{
+  background-color: aqua;
+  text-align: center;
+  padding: 5px;
+}
+
+h2{
+  font-size: 14px;
+  font-family: sans-serif;
+}
