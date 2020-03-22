@@ -5,11 +5,12 @@ import React from 'react';
 puede confundir la funcion con un componente de HTML por ejemplo
 con <header> por eso le ponemos mayusculas */
 
-function TaskCount(){
+function TaskCount(props){
+    // {count:0}
     return(
         <div className="row m-3">
                 <div className="col-12">
-                    <p className="task_title m-0 p-1">You have 1 incomplete task</p>
+                    <p className="task_title m-0 p-1">You have {props.count} incomplete task</p>
                 </div>
         </div>
     );

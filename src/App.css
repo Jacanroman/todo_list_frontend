@@ -46,6 +46,11 @@ color: #222;
   background-color: rgb(200, 222, 250);
 }
 
+.dueDate{
+  height: 100%;
+  color: blue;
+}
+
 .task-done {
   text-decoration-line: line-through
 }
