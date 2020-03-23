@@ -20,19 +20,13 @@ height: 150px;
 color: #222;
 }
 
-.main {
-  height: auto;
-  margin-top: 20px;
-  margin-bottom: 40px;
-      
-}
-
 .title{
   text-align: center;
   color: burlywood;
 }
 .sizeTodo {
   max-width: 800px;
+  padding-bottom: 30px;
 }
 .task_title {
   text-align: center;
@@ -63,7 +57,7 @@ color: #222;
 footer{
   background-color: aqua;
   text-align: center;
-  padding: 5px;
+  padding: 2px;
 }
 
 h2{
