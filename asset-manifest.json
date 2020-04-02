@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/todo_list_frontend/static/css/main.634d1bde.chunk.css",
+    "main.js": "/todo_list_frontend/static/js/main.2ee3414d.chunk.js",
+    "main.js.map": "/todo_list_frontend/static/js/main.2ee3414d.chunk.js.map",
+    "runtime-main.js": "/todo_list_frontend/static/js/runtime-main.858c6f9e.js",
+    "runtime-main.js.map": "/todo_list_frontend/static/js/runtime-main.858c6f9e.js.map",
+    "static/js/2.0200c6dd.chunk.js": "/todo_list_frontend/static/js/2.0200c6dd.chunk.js",
+    "static/js/2.0200c6dd.chunk.js.map": "/todo_list_frontend/static/js/2.0200c6dd.chunk.js.map",
+    "index.html": "/todo_list_frontend/index.html",
+    "precache-manifest.6b4d147e5b356c18327d2827a7c11a73.js": "/todo_list_frontend/precache-manifest.6b4d147e5b356c18327d2827a7c11a73.js",
+    "service-worker.js": "/todo_list_frontend/service-worker.js",
+    "static/css/main.634d1bde.chunk.css.map": "/todo_list_frontend/static/css/main.634d1bde.chunk.css.map",
+    "static/js/2.0200c6dd.chunk.js.LICENSE.txt": "/todo_list_frontend/static/js/2.0200c6dd.chunk.js.LICENSE.txt",
+    "static/media/28518.jpg": "/todo_list_frontend/static/media/28518.6e56b1e1.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.858c6f9e.js",
+    "static/js/2.0200c6dd.chunk.js",
+    "static/css/main.634d1bde.chunk.css",
+    "static/js/main.2ee3414d.chunk.js"
+  ]
+}
