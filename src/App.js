@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-import { v4 as uuidv4 } from 'uuid';
+//import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 import Header from './Header/Header';
 import TaskCount from './TaskCount/TaskCount';
@@ -11,121 +12,103 @@ import TaskDone from "./TaskDone/TaskDone";
 import Footer from "./Footer/Footer";
 
 
-//no podemos utilizar class se usa className
-// igual que for se usa htmlFor
-// JSX
-
-/* when you click in the Delete button our application
-needs to know this hapeened (Listen for the event)
-Know which button was clicked?
-Remove the relevant todo object from our state*/
-
-/* Click on the done button 
-our applications needs to know this happens
-which button was clicked
-change the value
-*/
-
-/* Adding a new task
-Ensure the AddTask componen is Controlled- so that it know about what is being 
-entered in the form
-click on the add button
-need to know that this happened
-what is the state of the form when this click happens? - donde
-//Add the new task (contructed based on the data in the form) to the tasks lists */
-
 
 
 function App() {
 
-  //const [counter,setCounter] = useState(0); 
+  const [tasks, setTasks] = useState([]); //comenzamos con un empty array 
 
-  const [tasks, setTasks] = useState([
+  useEffect(()=>{
+    //Fetch tasks from BACKEND (GET) with axios.get y promises
+    axios.get("https://b60xl2jgd9.execute-api.eu-west-1.amazonaws.com/dev/tasks")
+    .then(response=>{
+      //console.log("Succes",response);
+      setTasks(response.data);
+    })
+    .catch(err =>{
+      console.log("error",err);
+    });
 
-    {
-      text: "Clean the dishes",
-      completed: true,
-      dueDate: "2020-11-05",
-      id: uuidv4()
-    },
-    {
-      text: "Walk the dog",
-      completed: false,
-      dueDate: "2020-12-05",
-      id: uuidv4()
-    },
-    {
-      text: "Phone the vets",
-      completed: true,
-      dueDate: "2020-10-03",
-      id: uuidv4()
-    },
-    {
-      text: "Deflea the cat",
-      completed: false,
-      dueDate: "2020-05-05",
-      id: uuidv4()
-    },
-    {
-      text: "clean the house",
-      completed: false,
-      dueDate: "2020-06-07",
-      id: uuidv4()
-    }
-  ]);
-
-
+  },[]);
+  
+  
   // A function to delete a task from tasks array (based on ID), and update the state with the news
   // Any function that updates state should live where the state lives
 
   const deleteTask = (id) => {
-    // delete the task with the id from the tasks array
-    // tasks.splice(index?,1)
 
-    const filteredTasks = tasks.filter((task) => {
-      if (task.id === id) {
-        return false;
-      } else {
-        return true;
-      }
-    });
+   axios.delete(`https://b60xl2jgd9.execute-api.eu-west-1.amazonaws.com/dev/tasks/${id}`)
+    .then(response =>{
+      
+      const filteredTasks = tasks.filter((task) => {
+        if (task.TaskId === id) {
+          return false;
+        } else {
+          return true;
+        }
+      });
+      //Update the state with the new (shorter) array
+      setTasks(filteredTasks);
 
-    //Update the state with the new (shorter) array
-    setTasks(filteredTasks);
+    })
+    .catch(err =>{
+      console.log("API Error ",err);
+    })
+
   }
 
 
-  const markTaskComplete = (id) => {
-    // Create a new array of updated tasks, where the completed propierty of the matching taks has been updated
-    const newTasks = tasks.map((task) => {
-      //return a value to put in the same position in the new array
-      if (task.id === id) {
-        task.completed = true;
-      }
-      return task;
-    });
+  const markTaskComplete = (id) => { 
+    
+    axios.put(`https://b60xl2jgd9.execute-api.eu-west-1.amazonaws.com/dev/tasks/${id}`,{Completed:true})
+      .then((response) =>{
+        console.log("updated",response);
+        //console.log(updTask)
+        // Create a new array of updated tasks, where the completed propierty of the matching taks has been updated
+        const newTasks = tasks.map((task) => {
+        //return a value to put in the same position in the new array
+        if (task.TaskId === id) {
+          task.Completed = 1;
+        }
+          return task;
+        });
 
-    setTasks(newTasks)
+        setTasks(newTasks);
+        
+      })
+      .catch(err =>{
+        console.log("Error Updating Task",err);
+      })
+    
   }
 
 
-
-  const addNewTask = (text, date) => {
+  const addNewTask = (text, date, userid=1) => {
     //Create a new task object based on the data passed as parameters
     const newTask = {
-      text: text,
-      dueDate: date,
-      completed: false,
-      id: uuidv4() //  TODO: UUID-- use the uuid package NPM
-    }
+      Description: text,
+      DueDate: date,
+      UserId: userid 
+    };
 
-    //Create a new array of tasks, which includes this new task
-    // Avoid mutating arrays or object (push, pop,shift, splice, sort)
-    //const copy = tasks.slice() esto es valido porque es una copia
-    const newTasks = [...tasks, newTask]
 
-    //use the setTasks function to update the state
-    setTasks(newTasks)
+    axios.post(`https://b60xl2jgd9.execute-api.eu-west-1.amazonaws.com/dev/tasks`, newTask)
+      .then(response =>{
+        
+        //Create a new array of tasks, which includes this new task
+        // Avoid mutating arrays or object (push, pop,shift, splice, sort)
+        //const copy = tasks.slice() esto es valido porque es una copia
+        console.log(response.data)
+        const newTasks = [...tasks, response.data];
+        
+        //use the setTasks function to update the state
+        setTasks(newTasks);
+      })
+      .catch(err =>{
+        console.log("Error creating task",err)
+      })
+
+    
   }
 
 
@@ -140,26 +123,26 @@ function App() {
 
         {/* Passing a prop of text to each Task component*/}
         {tasks.map((task) => {
-          if (task.completed === false) {
+          if (task.Completed === 0) {
             return <Task
-              key={task.id}
+              key={task.TaskId}
 
               deleteTaskFunc={deleteTask}
               markCompleteFunction={markTaskComplete}
-              text={task.text}
-              dueDate={task.dueDate}
-              completed={task.completed}
-              id={task.id}
+              text={task.Description}
+              dueDate={task.DueDate}
+              completed={task.Completed}
+              id={task.TaskId}
             />
           } else {
             return <TaskDone
-              key={task.id}
+              key={task.TaskId}
 
               deleteTaskFunc={deleteTask}
-              text={task.text}
-              dueDate={task.dueDate}
-              completed={task.completed}
-              id={task.id} />
+              text={task.Description}
+              dueDate={task.DueDate}
+              completed={task.Completed}
+              id={task.TaskId} />
           }
         })}
 
