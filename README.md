@@ -20,13 +20,13 @@ This project uses the following technology:
 It has been designed and built with mobile-first reponsive principles in mind.
 
 
-## Web
+## WebApp
 
 <a href="[https://jacanroman.github.io/todo_list_frontend/]"><img src="https://github.com/Jacanroman/todo_list_frontend/blob/master/src/images/web.png" alt="Image_web" /></a>
 
 
 
-## Mobile
+## MobileApp
 
 <a href="[https://jacanroman.github.io/todo_list_frontend/]"><img src="https://github.com/Jacanroman/todo_list_frontend/blob/master/src/images/Mobile.png" alt="Image_web"/></a>
 
